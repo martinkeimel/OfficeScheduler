@@ -1,0 +1,16 @@
+{
+  "name": "room-booker", 
+  "description": "Web App for booking rooms",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "bower": "*",
+    "mongoose": "*",
+    "winser": "*",
+    "uuid": "^2.0.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Room Booker",
+  "description": "Web App for booking rooms",
+  "repository": "https://github.com/martinkeimel/RoomBooker",
+  "logo": "https://avatars2.githubusercontent.com/u/2685575?v=3&s=200",
+  "keywords": ["node", "material", "angular"]
+}
