@@ -2,48 +2,47 @@
 <html lang="en" ng-app="schedulerApp">
   
   <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>Client Details</title>
+    <title>Room Booker</title>
     <link rel="stylesheet" href="lib/angular-material/angular-material.min.css">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="assets/css/global.css">
   </head>
   
   <body layout="column" layout-align="center center">
-
     <div ng-controller="calendarCtrl">
       <md-toolbar>
-          <!--The left side is hidden when the screen size is larger than small -->
-          <md-button class="menu" hide-gt-sm><i class="fa fa-bars"></i></md-button>
-          <h2 class="md-toolbar-tools"> Room Booker </h2>
-      </md-toolbar>      
-      <div ui-calendar="uiConfig.calendar" ng-model="eventSource"></div>
+        <!--The left side is hidden when the screen size is larger than small -->
+        <md-button class="menu" hide-gt-sm>
+          <i class="fa fa-bars"></i>
+        </md-button>
+        <h2 class="md-toolbar-tools">Room Booker</h2>
+      </md-toolbar>
+      <md-content layout-padding>
+        <div id="myCalendar" ui-calendar="uiConfig.calendar" ng-model="eventSource" flex></div>
+      </md-content>
     </div>
-    
     <!-- Angular Material Dependencies -->
     <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/angular-animate/angular-animate.min.js"></script>    
+    <script src="lib/angular-animate/angular-animate.min.js"></script>
     <script src="lib/angular-aria/angular-aria.min.js"></script>
     <script src="lib/angular-material/angular-material.min.js"></script>
     <!-- Help Javascript libraries-->
     <script src="lib/underscore/underscore-min.js"></script>
-      
     <!-- Calendar -->
-    <link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css"/>
+    <link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css" />
     <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="lib/moment/moment.js"></script>
     <script type="text/javascript" src="lib/angular-ui-calendar/src/calendar.js"></script>
     <script type="text/javascript" src="lib/fullcalendar/dist/fullcalendar.js"></script>
     <script type="text/javascript" src='lib/fullcalendar/dist/lang/es.js'></script>
-
     <script src="js/app.js"></script>
     <script src="js/factories/helper.js"></script>
     <script src="js/controllers/newEventCtrl.js"></script>
     <script src="js/services/eventService.js"></script>
     <script src="js/controllers/calendarCtrl.js"></script>
   </body>
-
 </html>

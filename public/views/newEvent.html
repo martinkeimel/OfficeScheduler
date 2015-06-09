@@ -1,17 +1,23 @@
-<md-dialog aria-label="Add new event" ng-controller="newEventCtrl">
-    <md-content layout-padding style="width:600px">
+<md-dialog aria-label="Add new event" flex>
+    <md-content layout-padding>
         <form name="userForm">
             <md-input-container flex>
                 <label>Profesional</label>
-                <input ng-model="event.owner">
+                <input ng-model="newEvent.owner">
             </md-input-container>
-            <md-input-container flex>
+            <div layout="row">
+            <md-input-container flex style="width: 50%">
                 <label>Fecha</label>
-                <input type="date" ng-model="event.start">
+                <input type="date" ng-model="newEvent.startDate" >
             </md-input-container>
+            <md-input-container flex style="width: 50%" >
+                <label>Hora</label>
+                <input type="time" ng-model="newEvent.startTime" >
+            </md-input-container>
+            </div>
             <md-input-container flex>
                 <label>Paciente</label>
-                <input ng-model="event.title">
+                <input ng-model="newEvent.title">
             </md-input-container>
             <div layout="row" layout-padding layout-align="end center" style="width:100%">
                 <md-button class="md-raised" ng-click="closeDialog()">Cancelar</md-button>

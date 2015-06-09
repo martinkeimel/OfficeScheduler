@@ -17,16 +17,17 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
         return $http.post('/api/events/update', postData);
     };
 
-    this.showNewEvent = function ($clickEvent, date) {
+    this.showNewEvent = function ($clickEvent, clickedMoment, onSuccess) {
         var parentEl = angular.element(document.body);
         $mdDialog.show({
             parent: parentEl,
             targetEvent: $clickEvent,
+            controller: 'newEventCtrl',
             templateUrl: '../views/newEvent.html',
             locals: {
-                date: date
+                startMoment: clickedMoment
             }
-        });
+        }).then(onSuccess);
     }
 
 }); 
