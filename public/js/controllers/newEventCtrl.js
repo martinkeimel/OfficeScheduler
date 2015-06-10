@@ -1,14 +1,26 @@
 'use strict';
 
 angular.module('schedulerApp')
-    .controller('newEventCtrl', function newEventCtrl($scope, $location, $mdDialog, eventService, helper, startMoment) {
-    $scope.newEvent = {
-        _id: String,
-        title: "sarasa",
-        startDate: startMoment.toDate(),
-        startTime: startMoment.toDate(),
-        owner: "mk",
-    };
+    .controller('newEventCtrl', function newEventCtrl($scope, $location, $mdDialog, eventService, helper, startMoment, calEvent) {
+    $scope.newEvent = {};
+    if (startMoment) {
+        $scope.newEvent = {
+            _id: "",
+            title: "sarasa",
+            startDate: startMoment.toDate(),
+            startTime: startMoment.toDate(),
+            owner: "mk",
+        };
+    }
+    else if (calEvent) {
+        $scope.newEvent = {
+            _id: calEvent._id,
+            title: calEvent.title,
+            startDate: calEvent.start.toDate(),
+            startTime: calEvent.start.toDate(),
+            owner: calEvent.owner
+        };
+    }
 
     $scope.closeDialog = function () {
         $mdDialog.hide("Cancel");
@@ -28,7 +40,7 @@ angular.module('schedulerApp')
             .success(function (data, status, headers, config) {
             $mdDialog.hide("Save");
         })
-        .error(function (data, status, headers, config) {
+      .error(function (data, status, headers, config) {
             $mdDialog.hide("Error");
             //toaster.pop('error', current);
         });

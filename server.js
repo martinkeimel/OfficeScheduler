@@ -15,10 +15,9 @@ var EventsSchema = new Schema({
   title: String,
   start: String,
   end: String,
-  owner: String,
-  allDay: Boolean
+  owner: String
 }).pre('save', function (next) {
-  if (this._id === undefined) {
+  if (this._id === undefined || this._id === "") {
     this._id = uuid.v1();
   }
   next();
@@ -48,13 +47,27 @@ app.get('/api/events', function (req, res) {
 
 app.post('/api/events/update', function (req, res) {
   var e = new Event(req.body);
-  e.save(function (err, event) {
-
-    if (err) return res.send(400, err);
-
-    return res.send(200, "OK");
-
-  });
+  if (e._id){
+    Event.update(
+      {_id : e._id}, 
+      {
+        title: e.title,
+        start: e.start,
+        end: e.end,
+        owner: e.owner
+      }, {}, 
+      function (err, event) {
+        if (err) return res.send(400, err);
+        return res.send(200, "OK");
+    });
+  }
+  else
+  {
+    e.save(function (err, event) {
+      if (err) return res.send(400, err);
+      return res.send(200, "OK");
+    });
+  }
 });
 
 app.listen(process.env.PORT || 3001, function () {

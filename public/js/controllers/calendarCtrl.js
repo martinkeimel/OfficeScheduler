@@ -23,7 +23,7 @@ angular.module('schedulerApp')
                 eventService.showNewEvent(jsEvent, clickedMoment, HandleNewEventCallback);
             },
             eventClick: function (calEvent, jsEvent, view) {
-                eventService.showExistingEvent(calEvent);
+                eventService.showExistingEvent(calEvent, HandleNewEventCallback);
             }
         }
     };
@@ -35,6 +35,7 @@ angular.module('schedulerApp')
     }
     
     function LoadEvents() {
+        $scope.events.length = 0;
         eventService.getAll()
         .success(function (events, status, headers, config) {
             for (var index = 0; index < events.length; index++) {

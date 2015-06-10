@@ -25,9 +25,22 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
             controller: 'newEventCtrl',
             templateUrl: '../views/newEvent.html',
             locals: {
-                startMoment: clickedMoment
+                startMoment: clickedMoment,
+                calEvent: ""
             }
         }).then(onSuccess);
-    }
+    };
 
+    this.showExistingEvent = function (calEvent, onSuccess) {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            controller: 'newEventCtrl',
+            templateUrl: '../views/newEvent.html',
+            locals: {
+                startMoment: "",
+                calEvent: calEvent
+            }
+        }).then(onSuccess);
+    };
 }); 
