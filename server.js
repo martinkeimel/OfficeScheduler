@@ -24,7 +24,8 @@ var EventsSchema = new Schema({
 });
 
 //open db connection
-mongoose.connect('mongodb://localhost:27017/RoomBooker');
+//mongoose.connect('mongodb://localhost:27017/RoomBooker');
+mongoose.connect('mongodb://roombooker:roombooker123@dbh13.mongolab.com:27137/roombooker');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 // Mongoose Model definition
