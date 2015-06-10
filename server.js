@@ -41,7 +41,10 @@ app.get('/', function (req, res) {
 
 app.get('/api/events', function (req, res) {
   Event.find({}, function (err, myEvents) {
-    if (err) return console.error(err);
+    if (err){
+        res.send(400, err); 
+        return console.error(err);
+    }
     res.json(myEvents);
   });
 });

@@ -42,7 +42,7 @@ angular.module('schedulerApp')
         })
       .error(function (data, status, headers, config) {
             $mdDialog.hide("Error");
-            //toaster.pop('error', current);
+            helper.ShowErrorToast(data);
         });
 
     };

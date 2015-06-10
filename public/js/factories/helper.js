@@ -1,6 +1,6 @@
 
 angular.module('schedulerApp')
-    .factory("helper", function () {
+    .factory("helper", function ($mdToast) {
 
     var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
     var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
@@ -18,8 +18,42 @@ angular.module('schedulerApp')
                 }
             }
             return value;
+        },
+        ShowSuccessToast: function (message) {
+            $mdToast.show({
+                template: '<md-toast class="success">' +
+                '<span flex>{{m}}</span>' +
+                '</md-toast>',
+                locals: {
+                    m: message
+                },
+                position: "bottom right",
+                hideDelay: 6000,
+                controller: "ToastCtrl"
+            });
+        },
+        ShowErrorToast: function (message) {
+            $mdToast.show({
+                template: '<md-toast class="error">' +
+                '<span flex>Ha ocurrido un error: {{m}}</span>' +
+                '<md-button ng-click="closeToast()">' +
+                'OK' +
+                '</md-button>' +
+                '</md-toast>',
+                locals: {
+                    m: message
+                },
+                position: "bottom right",
+                controller: "ToastCtrl"
+            });
         }
     };
 
     return helper;
+}).controller('ToastCtrl', function ($scope, $mdToast, m) {
+  $scope.m = m;
+  
+  $scope.closeToast = function() {
+    $mdToast.hide();
+  };
 });

@@ -157,3 +157,11 @@ span.name {
   font-size:1.1em;
   padding-left:5px;
 }
+
+md-toast.success{
+  background-color:darkgreen;
+}
+
+md-toast.error{
+  background-color:darkred;
+}

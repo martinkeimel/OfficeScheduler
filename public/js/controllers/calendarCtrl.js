@@ -30,6 +30,7 @@ angular.module('schedulerApp')
     
     function HandleNewEventCallback(status){
         if (status && status == "Save"){
+            helper.ShowSuccessToast("El evento se ha agregado/modificado exitosamente");
             LoadEvents();
         }
     }
@@ -45,7 +46,7 @@ angular.module('schedulerApp')
             }
         })
         .error(function (data, status, headers, config) {
-            //toaster.pop('error', current);
+            helper.ShowErrorToast(data);
         });
     }
 
