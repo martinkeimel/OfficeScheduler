@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('schedulerApp')
-    .controller('calendarCtrl', function calendarCtrl($scope, $location, eventService, helper) {
+    .controller('calendarCtrl', function calendarCtrl($scope, $location, eventService, helper, socket) {
     /* config object */
     $scope.uiConfig = {
         calendar: {
@@ -31,26 +31,54 @@ angular.module('schedulerApp')
     function HandleNewEventCallback(status){
         if (status && status == "Save"){
             helper.ShowSuccessToast("El evento se ha agregado/modificado exitosamente");
-            LoadEvents();
         }
     }
     
     function LoadEvents() {
-        $scope.events.length = 0;
         eventService.getAll()
         .success(function (events, status, headers, config) {
             for (var index = 0; index < events.length; index++) {
-                events[index].start = helper.StringToDate(JSON.parse(events[index].start));
-                events[index].end = helper.StringToDate(JSON.parse(events[index].end));
-                $scope.events.push(events[index]);
+                AddEventToScope(events[index]);
             }
         })
         .error(function (data, status, headers, config) {
             helper.ShowErrorToast(data);
         });
     }
+    
+    function AddEventToScope(event){
+        event.start = helper.StringToDate(JSON.parse(event.start));
+        event.end = helper.StringToDate(JSON.parse(event.end));
+        $scope.events.push(event);
+    }
 
+    function RemoveEventFromScope(event){
+        var indexToRemove;
+        for (var index = 0; index <  $scope.events.length; index++) {
+            if ($scope.events[index]._id == event._id) {
+                indexToRemove = index;
+                break;
+            }   
+        }
+        $scope.events.splice(indexToRemove, 1);
+    }
+    
     $scope.events = [];
     LoadEvents();
     $scope.eventSource = [$scope.events];
+    
+    socket.on('newEvent', function (data){
+        AddEventToScope(data);
+    });
+    
+    socket.on('updatedEvent', function (data){
+        RemoveEventFromScope(data);
+        AddEventToScope(data);
+    });
+    
+    $scope.$on('$destroy', function (event) {
+        socket.removeAllListeners();
+        // or something like
+        // socket.removeListener(this);
+    });
 });

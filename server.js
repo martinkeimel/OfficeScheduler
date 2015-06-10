@@ -1,13 +1,15 @@
-/*var express = require('express');
-var app = express();
-var http = require('http').Server(express);
-var mongoose = require('mongoose');*/
-var express = require('express');
-var uuid = require('uuid');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var app = express();
+var express     = require('express');
+var uuid        = require('uuid');
+var bodyParser  = require('body-parser');
+var mongoose    = require('mongoose');
+var app         = express();
+var http        = require('http').Server(app);
 
+var server = app.listen(process.env.PORT || 3001, function () {
+  console.log('listening on *:3001');
+});
+
+var io          = require('socket.io')(http).listen(server);
 // Mongoose Schema definition
 var Schema = mongoose.Schema;
 var EventsSchema = new Schema({
@@ -62,18 +64,23 @@ app.post('/api/events/update', function (req, res) {
       }, {}, 
       function (err, event) {
         if (err) return res.send(400, err);
-        return res.send(200, "OK");
+        Event.find({_id : req.body._id}, function (err, updatedEvent){
+          if (err || updatedEvent.length == 0) return res.send(400, err);
+          io.emit('updatedEvent', updatedEvent[0]);
+          return res.send(200, "OK");
+        });
     });
   }
   else
   {
     e.save(function (err, event) {
       if (err) return res.send(400, err);
+      io.emit('newEvent', event._doc);
       return res.send(200, "OK");
     });
   }
 });
 
-app.listen(process.env.PORT || 3001, function () {
-  console.log('listening on *:3001');
+io.on('connection', function(socket){
+  console.log('new connection');
 });
