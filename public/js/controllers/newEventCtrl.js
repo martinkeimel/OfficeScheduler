@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('schedulerApp')
-    .controller('newEventCtrl', function newEventCtrl($scope, $location, $mdDialog, eventService, helper, startMoment, calEvent) {
+    .controller('newEventCtrl', function newEventCtrl($scope, $location, $mdDialog, eventService, helper, startMoment, calEvent, rooms) {
     $scope.newEvent = {};
+    $scope.rooms = rooms;
+    $scope.searchText = "";
+
     if (startMoment) {
         $scope.newEvent = {
             _id: "",
@@ -11,6 +14,7 @@ angular.module('schedulerApp')
             startTime: startMoment.toDate(),
             owner: "mk",
         };
+    $scope.selectedRoom = {};
     }
     else if (calEvent) {
         $scope.newEvent = {
@@ -20,6 +24,8 @@ angular.module('schedulerApp')
             startTime: calEvent.start.toDate(),
             owner: calEvent.owner
         };
+        $scope.selectedRoom = calEvent.room;
+        $scope.searchText = calEvent.room.title;
     }
 
     $scope.closeDialog = function () {
@@ -34,16 +40,32 @@ angular.module('schedulerApp')
             start: JSON.stringify($scope.newEvent.startDate),
             end: JSON.stringify(new Date($scope.newEvent.startDate.setMinutes($scope.newEvent.startDate.getMinutes() + 60))),
             owner: $scope.newEvent.owner,
+            room: $scope.selectedRoom._id
         };
-        //TODO: que se cierre la ventana
+
         eventService.update(event)
             .success(function (data, status, headers, config) {
             $mdDialog.hide("Save");
         })
-      .error(function (data, status, headers, config) {
+            .error(function (data, status, headers, config) {
             $mdDialog.hide("Error");
             helper.ShowErrorToast(data);
         });
 
     };
+
+    $scope.querySearch = function (query) {
+        var results = query ? $scope.rooms.filter(createFilterFor(query)) : $scope.rooms;
+        return results;
+    };
+    
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(room) {
+            return (room.title.indexOf(lowercaseQuery) === 0);
+        };
+    }
 });

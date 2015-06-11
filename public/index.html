@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/global.css">
   </head>
   
-  <body layout="column" layout-align="center center">
+  <body layout="column">
     <div ng-controller="calendarCtrl">
       <md-toolbar>
         <!--The left side is hidden when the screen size is larger than small -->
@@ -21,6 +21,12 @@
         </md-button>
         <h2 class="md-toolbar-tools">Room Booker</h2>
       </md-toolbar>
+      <div class="roomSelector" layout="row" layout-align="center center">
+        <span ng-repeat="room in rooms" class="md-raised" style="background-color: {{room.color}};">
+          <p>{{ room.title }}</p>
+          <md-checkbox class="md-secondary" ng-model="room.shown"></md-checkbox>
+        </span>
+      </div>
       <md-content layout-padding>
         <div id="myCalendar" ui-calendar="uiConfig.calendar" ng-model="eventSource" flex></div>
       </md-content>
@@ -45,6 +51,8 @@
     <script src="js/factories/socket.js"></script>
     <script src="js/controllers/newEventCtrl.js"></script>
     <script src="js/services/eventService.js"></script>
+    <script src="js/services/roomService.js"></script>
     <script src="js/controllers/calendarCtrl.js"></script>
   </body>
+
 </html>
