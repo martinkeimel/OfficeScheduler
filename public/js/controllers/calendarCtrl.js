@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('schedulerApp')
-    .controller('calendarCtrl', function calendarCtrl($rootScope, $scope, $location, eventService, roomService, helper, socket) {
+    .controller('calendarCtrl', function calendarCtrl($rootScope, $scope, $location, $mdSidenav, eventService, roomService, helper, socket) {
     /* config object */
     $scope.uiConfig = {
         calendar: {
@@ -104,4 +104,12 @@ angular.module('schedulerApp')
       // or something like
       // socket.removeListener(this);
     });
+    
+    $scope.hideLeftSidebar = function(){
+       $mdSidenav('left').close();
+    };
+    
+    $scope.showLeftSidebar = function(){
+       $mdSidenav('left').open();
+    };
   });

@@ -166,24 +166,28 @@ md-toast.error{
   background-color:darkred;
 }
 
-.roomSelector span p {
+/*.roomSelector div p {
   display: inline;
 }
 
-.roomSelector span md-checkbox{
+.roomSelector div md-checkbox{
   display: inline;
-}
-.roomSelector span{
+}*/
+.roomSelector div.roomItem{
+  width: 100%;
   font-size: .85em;
   cursor:default;
-  border-radius:16px;
-  display:block;
-  height:32px;
+  border-radius:8px;
+  /*height:32px;*/
   line-height:32px;
   margin:8px 8px 0 0;
   padding:0 8px 0 12px;
-  float:left;
+  /*float:left;*/
   box-shadow: 0 1px rgb(224,224,224);
   background: rgb(224,224,224);  
   color: #fff;
+}
+
+.md-toolbar-tools {
+  width:auto;
 }
