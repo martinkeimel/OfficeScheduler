@@ -34,6 +34,7 @@ angular.module('schedulerApp')
 
     $scope.save = function () {
         $scope.newEvent.startDate.setHours($scope.newEvent.startTime.getHours());
+        $scope.newEvent.startDate.setMinutes($scope.newEvent.startTime.getMinutes());
         var event = {
             _id: $scope.newEvent._id,
             title: $scope.newEvent.title,
