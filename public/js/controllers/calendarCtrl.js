@@ -9,7 +9,8 @@ angular.module('schedulerApp')
             timezone: "local",
             minTime: "09:00:00",
             maxTime: "21:00:00",
-            editable: true,
+            eventStartEditable: true,
+            eventDurationEditable: false,
             defaultView: 'agendaWeek',
             header: {
                 left: 'agendaWeek agendaDay',
@@ -24,6 +25,11 @@ angular.module('schedulerApp')
             },
             eventClick: function (calEvent, jsEvent, view) {
                 eventService.showExistingEvent(calEvent, $scope.rooms, HandleNewEventCallback);
+            },
+            eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) { 
+                event.start = JSON.stringify(event.start);
+                event.end = JSON.stringify(event.end);
+                eventService.update(event);
             }
         }
     };

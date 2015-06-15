@@ -5,14 +5,9 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
     //return the array
     this.getAll = function () {
         return $http.get('/api/events');
-    }
-       
-    //search by id in the current array
-    this.getById = function (blogItemId) {
-        return $http.get('/api/events' + blogItemId);
     };
-    
-    //add a new element to array
+          
+    //add a new event or modify it
     this.update = function (postData) {
         return $http.post('/api/events/update', postData);
     };
