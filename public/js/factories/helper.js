@@ -43,6 +43,7 @@ angular.module('schedulerApp')
                 locals: {
                     m: message
                 },
+                hideDelay: false,
                 position: "bottom right",
                 controller: "ToastCtrl"
             });

@@ -1,10 +1,26 @@
 <md-dialog aria-label="Add new event" flex>
-    <md-content layout-padding>
-        <form name="userForm">
-            <md-input-container flex>
-                <label>Profesional</label>
-                <input ng-model="newEvent.owner">
-            </md-input-container>
+    <md-content layout-padding layout="column">
+        <form name="eventForm">
+            <div layout="row">
+                <md-input-container flex style="width: 50%">
+                    <label>Profesional</label>
+                    <input ng-model="newEvent.owner">
+                </md-input-container>
+                <md-autocomplete flex style="width: 50%"
+                      md-input-name="autocompleteField"
+                      md-selected-item="selectedRoom"
+                      md-search-text="searchText"
+                      md-items="item in querySearch(searchText)"
+                      md-item-text="item.title"
+                      md-floating-label="Consultorio">
+                    <md-item-template>
+                      <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.title}}</span>
+                    </md-item-template>
+                    <!--<md-not-found>
+                      No matches found for "{{searchText}}".
+                    </md-not-found>-->
+                </md-autocomplete>
+            </div>
             <div layout="row">
             <md-input-container flex style="width: 50%">
                 <label>Fecha</label>

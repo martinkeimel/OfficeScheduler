@@ -17,7 +17,7 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
         return $http.post('/api/events/update', postData);
     };
 
-    this.showNewEvent = function ($clickEvent, clickedMoment, onSuccess) {
+    this.showNewEvent = function ($clickEvent, clickedMoment, rooms, onSuccess) {
         var parentEl = angular.element(document.body);
         $mdDialog.show({
             parent: parentEl,
@@ -26,12 +26,13 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
             templateUrl: '../views/newEvent.html',
             locals: {
                 startMoment: clickedMoment,
-                calEvent: ""
+                calEvent: "",
+                rooms: rooms
             }
         }).then(onSuccess);
     };
 
-    this.showExistingEvent = function (calEvent, onSuccess) {
+    this.showExistingEvent = function (calEvent, rooms, onSuccess) {
         var parentEl = angular.element(document.body);
         $mdDialog.show({
             parent: parentEl,
@@ -39,7 +40,8 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
             templateUrl: '../views/newEvent.html',
             locals: {
                 startMoment: "",
-                calEvent: calEvent
+                calEvent: calEvent,
+                rooms: rooms
             }
         }).then(onSuccess);
     };
