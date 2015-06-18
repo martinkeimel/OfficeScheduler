@@ -9,10 +9,10 @@ angular.module('schedulerApp')
     if (startMoment) {
         $scope.newEvent = {
             _id: "",
-            title: "sarasa",
+            title: "",
             startDate: startMoment.toDate(),
             startTime: startMoment.toDate(),
-            owner: "mk",
+            owner: "",
         };
     $scope.selectedRoom = {};
     }
@@ -43,15 +43,26 @@ angular.module('schedulerApp')
             owner: $scope.newEvent.owner,
             room: $scope.selectedRoom._id
         };
-
-        eventService.update(event)
-            .success(function (data, status, headers, config) {
-            $mdDialog.hide("Save");
-        })
-            .error(function (data, status, headers, config) {
-            $mdDialog.hide("Error");
-            helper.ShowErrorToast(data);
-        });
+        if ($scope.newEvent._id){
+            eventService.update(event)
+                .success(function (data, status, headers, config) {
+                    $mdDialog.hide("Save");
+                })
+                .error(function (data, status, headers, config) {
+                    $mdDialog.hide("Error");
+                    helper.ShowErrorToast(data);
+                });
+        }
+        else{
+            eventService.add(event)
+                .success(function (data, status, headers, config) {
+                    $mdDialog.hide("Save");
+                })
+                .error(function (data, status, headers, config) {
+                    $mdDialog.hide("Error");
+                    helper.ShowErrorToast(data);
+                });            
+        }
 
     };
 

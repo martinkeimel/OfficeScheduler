@@ -26,6 +26,8 @@ app.get('/api/events', eventService.getEvents);
 
 app.post('/api/events/update', eventService.updateEvent);
 
+app.post('/api/events/add', eventService.addEvent);
+
 /**********************************ROOMS***********************************************/
 app.get('/api/rooms', roomService.getRooms);
 

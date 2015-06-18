@@ -12,6 +12,10 @@ angular.module('schedulerApp').service('eventService', function ($http, $locatio
         return $http.post('/api/events/update', postData);
     };
 
+    this.add = function (postData) {
+        return $http.post('/api/events/add', postData);
+    };
+    
     this.showNewEvent = function ($clickEvent, clickedMoment, rooms, onSuccess) {
         var parentEl = angular.element(document.body);
         $mdDialog.show({
