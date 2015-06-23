@@ -24,29 +24,13 @@
           <md-icon md-svg-icon="assets/svg/ic_more_vert_white_24px.svg"></md-icon>
         </md-button>
       </md-toolbar>
-      <section layout="row" flex>
-        <md-sidenav md-component-id="left" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md')">
-          <md-toolbar class="md-theme-indigo" layout="row" layout-align="center center">
-            <h1 class="md-toolbar-tools">Consultorios</h1>
-            <md-button ng-click="hideLeftSidebar()" hide-gt-md>
-              <md-icon md-svg-src="assets/svg/ic_keyboard_arrow_left_white_24px.svg"></md-icon>
-            </md-button>
-          </md-toolbar>
-          <md-content layout-padding>
-            <div class="roomSelector" layout="column" layout-align="space-around center">
-              <div class="roomItem" ng-repeat="room in rooms" style="background-color: {{room.color}};" flex>
-                <md-checkbox ng-model="room.shown">{{ room.title }}</md-checkbox>
-              </div>
-            </div>
-          </md-content>
-        </md-sidenav>
-        <md-content layout-padding>
-          <div id="myCalendar" ui-calendar="uiConfig.calendar" ng-model="eventSource" flex></div>
-        </md-content>
+      <!-- container -->
+      <div ng-view></div>
       </section>
     </div>
     <!-- Angular Material Dependencies -->
     <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
     <script src="lib/angular-animate/angular-animate.min.js"></script>
     <script src="lib/angular-aria/angular-aria.min.js"></script>
     <script src="lib/angular-material/angular-material.min.js"></script>

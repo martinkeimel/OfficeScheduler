@@ -86,8 +86,11 @@ angular.module('schedulerApp')
 
     $scope.events = [];
     $scope.rooms = [];
-    LoadEvents();
-    LoadRooms();
+    $scope.init = function (){
+        LoadEvents();
+        LoadRooms();
+    };
+
     $scope.eventSource = [$scope.events];
 
     socket.on('newEvent', function (data) {
