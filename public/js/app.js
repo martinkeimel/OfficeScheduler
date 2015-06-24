@@ -19,6 +19,11 @@ angular.module('schedulerApp', ['ui.calendar', 'ngMaterial', 'ngRoute'])
             controller: 'calendarCtrl',
             templateUrl: 'views/calendar.html'
             })
+         .when('/login', 
+	       {
+            templateUrl: 'views/login.html',
+            controller: 'loginCtrl'
+           })
         .otherwise({redirectTo: '/'});
         
     //================================================

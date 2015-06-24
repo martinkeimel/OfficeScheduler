@@ -54,7 +54,9 @@ angular.module('schedulerApp')
             }
         })
       .error(function (data, status, headers, config) {
+          if (status != 401){
             helper.ShowErrorToast(data);
+          }
         });
     }
 
@@ -68,7 +70,9 @@ angular.module('schedulerApp')
             }
         })
       .error(function (data, status, headers, config) {
+          if (status != 401){
             helper.ShowErrorToast(data);
+          }
         });
     }
 

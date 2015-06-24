@@ -1,0 +1,18 @@
+<md-content flex layout-padding layout="column" layout-align="space-between center">
+<md-whiteframe class="md-whiteframe-z5" layout-padding  style="width:250px">
+  <form name="loginForm">
+    <md-input-container>
+      <label>Nombre de Usuario</label>
+      <input ng-model="user.username">
+    </md-input-container>
+    <md-input-container>
+      <label>Contraseña</label>
+      <input type="password" ng-model="user.password">
+    </md-input-container>
+    <div layout="row" layout-padding layout-align="end center" style="width:100%">
+        <md-button class="md-raised md-primary" ng-click="login()">Iniciar sesion</md-button>
+    </div>
+    <p>No tenes cuenta? <a href="/signup">Registrate</a></p>
+  </form>
+  </md-whiteframe>
+</md-content>
