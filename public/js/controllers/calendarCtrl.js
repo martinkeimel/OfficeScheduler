@@ -70,6 +70,7 @@ angular.module('schedulerApp')
         event.start = helper.StringToDate(JSON.parse(event.start));
         event.end = helper.StringToDate(JSON.parse(event.end));
         event.color = event.room.color;
+        event.stick = true;
         $scope.events.push(event);
     }
 
