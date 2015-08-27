@@ -27,9 +27,15 @@ angular.module('schedulerApp')
                 eventService.showExistingEvent(calEvent, $scope.rooms, HandleNewEventCallback);
             },
             eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) { 
-                event.start = JSON.stringify(event.start);
-                event.end = JSON.stringify(event.end);
-                eventService.update(event);
+                var eventToUpdate = {
+                    _id: event._id,
+                    title: event.title,
+                    start: JSON.stringify(event.start),
+                    end: JSON.stringify(event.end),
+                    owner: event.owner,
+                    room: event.room._id
+                };
+                eventService.update(eventToUpdate);
             }
         }
     };
@@ -67,8 +73,8 @@ angular.module('schedulerApp')
     }
 
     function AddEventToScope(event) {
-        event.start = helper.StringToDate(JSON.parse(event.start));
-        event.end = helper.StringToDate(JSON.parse(event.end));
+        event.start = helper.StringToDate(event.start);
+        event.end = helper.StringToDate(event.end);
         event.color = event.room.color;
         event.stick = true;
         $scope.events.push(event);
@@ -99,8 +105,12 @@ angular.module('schedulerApp')
     });
 
     socket.on('updatedEvent', function (data) {
-      $rootScope.$apply(function () {RemoveEventFromScope(data);});
-      $rootScope.$apply(function () {AddEventToScope(data);});
+      $rootScope.$apply(function () {
+          RemoveEventFromScope(data);
+          });
+      $rootScope.$apply(function () {
+          AddEventToScope(data);
+          });
     });
 
     $scope.$on('$destroy', function (event) {

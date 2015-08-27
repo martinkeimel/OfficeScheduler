@@ -8,6 +8,7 @@ angular.module('schedulerApp')
     var helper = {
         StringToDate: function (value) {
             if (typeof value === 'string') {
+                value = JSON.parse(value);
                 var a = reISO.exec(value);
                 if (a)
                     return new Date(value);
