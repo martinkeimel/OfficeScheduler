@@ -14,7 +14,6 @@ angular.module('schedulerApp')
             startTime: startMoment.toDate(),
             owner: "",
         };
-    $scope.selectedRoom = {};
     }
     else if (calEvent) {
         $scope.newEvent = {
