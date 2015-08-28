@@ -22,9 +22,20 @@
         </md-button>
         <span flex></span>
         <h2 class="md-toolbar-tools">Room Booker</h2>
-        <md-button class="md-icon-button" aria-label="Settings">
-          <md-icon md-svg-icon="assets/svg/ic_more_vert_white_24px.svg"></md-icon>
-        </md-button>
+        <span flex></span>
+        <md-menu ng-show="isLogged()">
+          <md-button class="md-icon-button" aria-label="Settings" ng-click="$mdOpenMenu($event)">
+            <md-icon md-svg-icon="assets/svg/ic_more_vert_white_24px.svg"></md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item >
+              <md-button ng-click="logout()">
+                <md-icon md-menu-align-target md-svg-icon="assets/svg/ic_person_outline_white_24px.svg"></md-icon>
+                Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </md-toolbar>
       <!-- container -->
       <div layout="row" layout-fill flex style="height:100%">
@@ -53,6 +64,7 @@
     <script src="js/controllers/mainCtrl.js"></script>
     <script src="js/controllers/newEventCtrl.js"></script>
     <script src="js/controllers/loginCtrl.js"></script>
+    <script src="js/controllers/signupCtrl.js"></script>
     <script src="js/services/eventService.js"></script>
     <script src="js/services/roomService.js"></script>
     <script src="js/services/authService.js"></script>

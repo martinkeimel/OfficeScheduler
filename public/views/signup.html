@@ -1,0 +1,35 @@
+<md-content flex layout-padding layout="row" layout-align="center center">
+    <md-whiteframe class="md-whiteframe-z5 formContainer" layout-padding>
+        <form name="signupForm">
+            <div layout="row">
+                <md-input-container flex>
+                    <label>Nombre de Usuario</label>
+                    <input ng-model="newUser.username">
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex>
+                    <label>Nombre</label>
+                    <input ng-model="newUser.name">
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex>
+                    <label>Password</label>
+                    <input ng-model="newUser.password">
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex>
+                    <label>Verifique su password</label>
+                    <input ng-model="newUser.confirmPassword">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-padding layout-align="end center" style="width:100%">
+                <md-button class="md-raised" >Cancelar</md-button>
+                <md-button class="md-raised md-primary">Aceptar</md-button>
+            </div>
+            </md-dialog-content>
+        </form>
+    </md-whiteframe>
+</md-content>

@@ -72,7 +72,16 @@ io.on('connection', function(socket){
 });
 
 
-// route to log in
+/**********************************AUTH***********************************************/
 app.post('/login', passport.authenticate('local'), function(req, res) {
     res.send(req.user);
 });
+
+app.get('/loggedin', function(req, res) { 
+    res.send(req.isAuthenticated() ? req.user : '0'); 
+}); 
+
+app.post('/logout', function(req, res){ 
+    req.logOut(); 
+    res.send(200); 
+}); 

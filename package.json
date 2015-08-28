@@ -11,8 +11,9 @@
     "uuid": "^2.0.1",
     "socket.io": "1.2.0",
     "express-session": "^1.11.3",
-    "passport" : "~0.1.17",         
-    "passport-local" : "~0.1.6"
+    "passport" : "0.1.18",         
+    "passport-local" : "0.1.6",
+    "bcrypt-nodejs" : "0.0.3"
   },
   "engines": {
     "node": "0.10.x"

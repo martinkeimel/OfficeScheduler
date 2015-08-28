@@ -13,16 +13,44 @@ angular.module('schedulerApp', ['ui.calendar', 'ngMaterial', 'ngRoute'])
         .primaryPalette('blue')
         .accentPalette('red');
 	
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, authService){
+    	// Initialize a new promise 
+    	var deferred = $q.defer(); 
+    	
+    	// Make an AJAX call to check if the user is logged in 
+    	authService.isLoggedIn().success(function(user){ 
+    		// Authenticated 
+    		if (user !== '0') {
+                $rootScope.isLogged = true;
+    			deferred.resolve();
+            } 
+    		// Not Authenticated 
+    		else { 
+    			$rootScope.message = 'You need to log in.'; 
+    			deferred.reject(); 
+    			$location.url('/login'); 
+    		} 
+    	}); 
+    	
+    	return deferred.promise; 
+    };
+    
     $routeProvider    
         .when('/', 
             {
             controller: 'calendarCtrl',
-            templateUrl: 'views/calendar.html'
+            templateUrl: 'views/calendar.html',
+            resolve: { loggedin: checkLoggedin }
             })
          .when('/login', 
 	       {
             templateUrl: 'views/login.html',
             controller: 'loginCtrl'
+           })
+         .when('/signup', 
+	       {
+            templateUrl: 'views/signup.html',
+            controller: 'signupCtrl'
            })
         .otherwise({redirectTo: '/'});
         
