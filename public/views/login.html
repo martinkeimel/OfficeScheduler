@@ -1,0 +1,26 @@
+<md-content flex layout-padding layout="row" layout-align="center center" style="height:100%">
+  <md-whiteframe class="md-whiteframe-z5 formContainer" layout-padding>
+    <form name="loginForm">
+      <md-input-container>
+        <label>Nombre de Usuario</label>
+        <input ng-model="user.username" required name="username">
+        <div ng-messages="loginForm.username.$error" ng-show="loginForm.username.$touched">
+          <div ng-message="required">El campo es requerido.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Contraseña</label>
+        <input type="password" ng-model="user.password" required name="password">
+        <div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$touched">
+          <div ng-message="required">El campo es requerido.</div>
+        </div>
+      </md-input-container>
+      <div layout="row" layout-padding layout-align="end center" style="width:100%">
+          <md-button class="md-raised md-primary" ng-click="login()" ng-disabled="loginForm.$invalid">Iniciar sesion</md-button>
+      </div>
+      <div layout="row" layout-align="center center">
+        <p>No tenes cuenta? <a href="#/signup">Registrate</a></p>
+      </div>
+    </form>
+  </md-whiteframe>
+</md-content>

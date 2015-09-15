@@ -14,20 +14,33 @@
   </head>
   
   <body layout="column">
-    <div ng-controller="calendarCtrl">
+    <div ng-controller="mainCtrl" flex>
       <md-toolbar layout="row" layout-align="space-between center">
         <!--The left side is hidden when the screen size is larger than small -->
         <md-button class="md-icon-button" aria-label="Rooms" hide-gt-md ng-click="showLeftSidebar()">
           <md-icon md-svg-icon="assets/svg/menu.svg"></md-icon>
         </md-button>
+        <span flex></span>
         <h2 class="md-toolbar-tools">Room Booker</h2>
-        <md-button class="md-icon-button" aria-label="Settings">
-          <md-icon md-svg-icon="assets/svg/ic_more_vert_white_24px.svg"></md-icon>
-        </md-button>
+        <span flex></span>
+        <md-menu ng-show="isLogged()">
+          <md-button class="md-icon-button" aria-label="Settings" ng-click="$mdOpenMenu($event)">
+            <md-icon md-svg-icon="assets/svg/ic_more_vert_white_24px.svg"></md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item >
+              <md-button ng-click="logout()">
+                <md-icon md-menu-align-target md-svg-icon="assets/svg/ic_person_outline_white_24px.svg"></md-icon>
+                Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </md-toolbar>
       <!-- container -->
-      <div ng-view></div>
-      </section>
+      <div layout="row" layout-fill flex style="height:100%">
+        <div ng-view flex layout-padding></div>
+      </div>
     </div>
     <!-- Angular Material Dependencies -->
     <script src="lib/angular/angular.min.js"></script>
@@ -35,6 +48,7 @@
     <script src="lib/angular-animate/angular-animate.min.js"></script>
     <script src="lib/angular-aria/angular-aria.min.js"></script>
     <script src="lib/angular-material/angular-material.min.js"></script>
+    <script src="lib/angular-messages/angular-messages.min.js"></script>
     <!-- Help Javascript libraries-->
     <script src="lib/underscore/underscore-min.js"></script>
     <!-- Calendar -->
@@ -48,9 +62,13 @@
     <script src="js/app.js"></script>
     <script src="js/factories/helper.js"></script>
     <script src="js/factories/socket.js"></script>
+    <script src="js/controllers/mainCtrl.js"></script>
     <script src="js/controllers/newEventCtrl.js"></script>
+    <script src="js/controllers/loginCtrl.js"></script>
+    <script src="js/controllers/signupCtrl.js"></script>
     <script src="js/services/eventService.js"></script>
     <script src="js/services/roomService.js"></script>
+    <script src="js/services/authService.js"></script>
     <script src="js/controllers/calendarCtrl.js"></script>
   </body>
 

@@ -48,6 +48,9 @@ angular.module('schedulerApp')
                 position: "bottom right",
                 controller: "ToastCtrl"
             });
+        },
+        CloseToast: function () {
+            $mdToast.hide();
         }
     };
 

@@ -191,3 +191,7 @@ md-toast.error{
 .md-toolbar-tools {
   width:auto;
 }
+
+md-whiteframe.formContainer{
+  width:300px;
+}
