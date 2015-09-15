@@ -73,15 +73,17 @@ io.on('connection', function(socket){
 
 
 /**********************************AUTH***********************************************/
-app.post('/login', passport.authenticate('local'), function(req, res) {
+app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
     res.send(req.user);
 });
 
-app.get('/loggedin', function(req, res) { 
+app.get('/api/user/loggedin', function(req, res) { 
     res.send(req.isAuthenticated() ? req.user : '0'); 
 }); 
 
-app.post('/logout', function(req, res){ 
+app.post('/api/user/logout', function(req, res){ 
     req.logOut(); 
     res.send(200); 
 }); 
+
+app.post('/api/user/add', userService.addUser);

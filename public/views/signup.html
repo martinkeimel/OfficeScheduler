@@ -4,32 +4,46 @@
             <div layout="row">
                 <md-input-container flex>
                     <label>Nombre de Usuario</label>
-                    <input ng-model="newUser.username">
+                    <input name="username" required md-maxlength="30" ng-model="newUser.username" />
+                    <div ng-messages="signupForm.username.$error" ng-show="signupForm.username.$touched">
+                      <div ng-message="required">El campo es requerido.</div>
+                      <div ng-message="md-maxlength">Ha excedido el máximo de 30 caracteres.</div>
+                    </div>                        
                 </md-input-container>
             </div>
             <div layout="row">
                 <md-input-container flex>
                     <label>Nombre</label>
-                    <input ng-model="newUser.name">
+                    <input required name="name" md-maxlength="30" ng-model="newUser.name" />
+                    <div ng-messages="signupForm.name.$error" ng-show="signupForm.name.$touched">
+                      <div ng-message="required">El campo es requerido.</div>
+                      <div ng-message="md-maxlength">Ha excedido el máximo de 30 caracteres.</div>
+                    </div>                        
                 </md-input-container>
             </div>
             <div layout="row">
                 <md-input-container flex>
                     <label>Password</label>
-                    <input ng-model="newUser.password">
+                    <input type="password" name="password" required ng-model="newUser.password" />
+                    <div ng-messages="signupForm.password.$error" ng-show="signupForm.password.$touched">
+                      <div ng-message="required">El campo es requerido.</div>
+                    </div>                        
                 </md-input-container>
             </div>
             <div layout="row">
                 <md-input-container flex>
                     <label>Verifique su password</label>
-                    <input ng-model="newUser.confirmPassword">
+                    <input type="password" name="confirmPassword" required ng-model="newUser.confirmPassword" value-should-match="newUser.password" />
+                    <div ng-messages="signupForm.confirmPassword.$error" ng-show="signupForm.confirmPassword.$touched">
+                      <div ng-message="required">El campo es requerido.</div>
+                      <div ng-message="valueShouldMatch">El password no coincide con su confirmación.</div>
+                    </div>           
                 </md-input-container>
             </div>
             <div layout="row" layout-padding layout-align="end center" style="width:100%">
-                <md-button class="md-raised" >Cancelar</md-button>
-                <md-button class="md-raised md-primary">Aceptar</md-button>
+                <md-button class="md-raised" href="#/login">Cancelar</md-button>
+                <md-button class="md-raised md-primary" ng-click="signup()" ng-disabled="signupForm.$invalid">Aceptar</md-button>
             </div>
-            </md-dialog-content>
         </form>
     </md-whiteframe>
 </md-content>

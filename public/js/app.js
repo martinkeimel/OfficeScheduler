@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module
-angular.module('schedulerApp', ['ui.calendar', 'ngMaterial', 'ngRoute'])
+angular.module('schedulerApp', ['ui.calendar', 'ngMaterial', 'ngRoute', 'ngMessages'])
 	   .config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $httpProvider){
 
     $mdIconProvider
