@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('schedulerApp')
-    .controller('loginCtrl', function loginCtrl($scope, $rootScope, $location, authService){
+    .controller('loginCtrl', function loginCtrl($scope, $rootScope, $location, authService, helper){
 		
 	$scope.login = function(){
 		authService.login($scope.user)
@@ -10,11 +10,13 @@ angular.module('schedulerApp')
         $rootScope.isLogged = true;
         $rootScope.user = $scope.user.username;
         $location.url('/');
+        helper.CloseToast();
       })
       .error(function(){
         $rootScope.message = 'Authentication failed. Please, try again.';
         $rootScope.isLogged = false;
         $location.url('/login');
+        helper.ShowErrorToast($rootScope.message);
       });
 	};	
 });

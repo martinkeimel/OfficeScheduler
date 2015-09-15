@@ -14,6 +14,8 @@ var io          = require('socket.io')(http).listen(server);
 var eventService = require('./server/services/EventService');
 eventService.configure(io);
 var roomService = require('./server/services/RoomService');
+var userService = require('./server/services/UserService');
+var User = require('./server/model/User');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,10 +25,15 @@ app.use(bodyParser.json());
 // Define the strategy to be used by PassportJS
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        if (username === "admin" && password === "admin") // stupid example
-            return done(null, {name: "admin"});
-
-        return done(null, false, { message: 'Incorrect username.' });
+        userService.getUserByUserName(username, function (err, user) {
+            if (user){
+                if (user.validPassword(password)){
+                    return done(null, { name: user.username });
+                }
+            }
+            
+            return done(null, false, { message: 'Incorrect username.' });
+        });
     }
 ));
 
