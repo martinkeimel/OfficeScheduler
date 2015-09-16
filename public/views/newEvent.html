@@ -4,7 +4,10 @@
             <div layout="row">
                 <md-input-container flex style="width: 50%">
                     <label>Profesional</label>
-                    <input ng-model="newEvent.owner">
+                    <input ng-model="newEvent.owner" required name="owner">
+                    <div ng-messages="eventForm.owner.$error" ng-show="eventForm.owner.$touched">
+                      <div ng-message="required">El campo es requerido.</div>
+                    </div>
                 </md-input-container>
                 <md-autocomplete flex style="width: 50%"
                       md-input-name="autocompleteField"
@@ -12,32 +15,48 @@
                       md-search-text="searchText"
                       md-items="item in querySearch(searchText)"
                       md-item-text="item.title"
-                      md-floating-label="Consultorio">
+                      md-floating-label="Consultorio"
+                      required
+                      md-search-text-change="validateAutocomplete()"
+                      md-selected-item-change="validateAutocomplete()">
                     <md-item-template>
                       <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.title}}</span>
                     </md-item-template>
                     <md-not-found>
                       No se econtraron coincidencias para "{{searchText}}"
                     </md-not-found>
+                    <div ng-messages="eventForm.autocompleteField.$error" ng-show="eventForm.autocompleteField.$touched">
+                      <div ng-message="required">El campo es requerido.</div>
+                      <div ng-message="autocompleteRequired">Debe seleccionar un valor de la lista.</div>
+                    </div>
                 </md-autocomplete>
             </div>
             <div layout="row">
             <md-input-container flex style="width: 50%">
                 <label>Fecha</label>
-                <input type="date" ng-model="newEvent.startDate" >
+                <input type="date" ng-model="newEvent.startDate" required name="startDate">
+                <div ng-messages="eventForm.startDate.$error" ng-show="eventForm.startDate.$touched">
+                  <div ng-message="required">El campo es requerido.</div>
+                </div>
             </md-input-container>
             <md-input-container flex style="width: 50%" >
                 <label>Hora</label>
-                <input type="time" ng-model="newEvent.startTime" >
+                <input type="time" ng-model="newEvent.startTime" required name="startTime">
+                <div ng-messages="eventForm.startTime.$error" ng-show="eventForm.startTime.$touched">
+                  <div ng-message="required">El campo es requerido.</div>
+                </div>
             </md-input-container>
             </div>
             <md-input-container flex>
                 <label>Paciente</label>
-                <input ng-model="newEvent.title">
+                <input ng-model="newEvent.title" required name="title">
+                <div ng-messages="eventForm.title.$error" ng-show="eventForm.title.$touched">
+                  <div ng-message="required">El campo es requerido.</div>
+                </div>
             </md-input-container>
             <div layout="row" layout-padding layout-align="end center" style="width:100%">
                 <md-button class="md-raised" ng-click="closeDialog()">Cancelar</md-button>
-                <md-button class="md-raised md-primary" ng-click="save()">Guardar</md-button>
+                <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="eventForm.$invalid">Guardar</md-button>
             </div>
             </md-dialog-content>
         </form>
