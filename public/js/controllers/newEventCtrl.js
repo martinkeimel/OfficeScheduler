@@ -70,6 +70,15 @@ angular.module('schedulerApp')
         return results;
     };
     
+    $scope.validateAutocomplete = function(){
+        if ($scope.selectedRoom){
+            $scope.eventForm.autocompleteField.$setValidity("autocompleteRequired", true);
+        }
+        else{
+            $scope.eventForm.autocompleteField.$setValidity("autocompleteRequired", false);
+        }
+    };
+    
     /**
      * Create filter function for a query string
      */
